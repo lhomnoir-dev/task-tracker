@@ -10,5 +10,5 @@ class Task:
         self.id = 0
         self.description = description
         self.status = status
-        self.createdAt = datetime.utcnow
-        self.updateAt = datetime.utcnow
+        self.createdAt = datetime.utcnow()
+        self.updateAt = datetime.utcnow()
