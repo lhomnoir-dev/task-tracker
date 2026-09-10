@@ -1,9 +1,11 @@
 from datetime import datetime
 
+
 class Status:
-    TODO = 'todo'
-    IN_POGRESS = 'in-progress'
-    DONE = 'done'
+    TODO = "todo"
+    IN_POGRESS = "in-progress"
+    DONE = "done"
+
 
 class Task:
     def __init__(self, description: str, status: str = Status.TODO):

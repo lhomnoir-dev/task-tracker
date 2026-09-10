@@ -4,6 +4,7 @@ from utils import to_dict, next_id
 
 FILENAME = "tasks.json"
 
+
 def add_task(task: Task):
     data = load_data(FILENAME)
     new_task = to_dict(task)
@@ -11,9 +12,13 @@ def add_task(task: Task):
     data.append(new_task)
     save_data(filename=FILENAME, data=data)
 
-def get_all_tasks() -> list:
+
+def get_all_tasks(status: str | None) -> list:
     data = load_data(FILENAME)
+    if status is not None:
+        data = [task for task in data if task["status"] == status]
     return data
+
 
 def get_task_by_id(task_id: int) -> dict | None:
     data = load_data(FILENAME)
@@ -21,6 +26,7 @@ def get_task_by_id(task_id: int) -> dict | None:
         if task["id"] == task_id:
             return task
     return None
+
 
 def update_task(task_id: int, updated_task: Task) -> bool:
     data = load_data(FILENAME)
@@ -33,6 +39,7 @@ def update_task(task_id: int, updated_task: Task) -> bool:
             return True
     return False
 
+
 def delete_task(task_id: int) -> bool:
     data = load_data(FILENAME)
     for i, task in enumerate(data):
@@ -42,5 +49,18 @@ def delete_task(task_id: int) -> bool:
             return True
     return False
 
+
 def delete_all_tasks() -> None:
     save_data(filename=FILENAME, data=[])
+
+
+def change_task_status(task_id: int, new_status: str) -> bool:
+    data = load_data(FILENAME)
+    for i, task in enumerate(data):
+        if task["id"] == task_id:
+            data[i]["status"] = new_status
+            save_data(filename=FILENAME, data=data)
+            return True
+    return False
+
+    
